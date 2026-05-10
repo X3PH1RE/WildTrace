@@ -4,13 +4,20 @@ dist
 .expo
 .turbo
 *.log
-.env
-.env*.local
-apps/*/.env
-apps/*/.env.local
 coverage
 .DS_Store
 *.pem
 supabase/.branches
 supabase/.temp
+
+# Dotenv: ignore all secret files; only `.env.example` may be committed (use negation below).
+.env
+.env.*
+!.env.example
+apps/**/.env
+apps/**/.env.*
+!apps/**/.env.example
+packages/**/.env
+packages/**/.env.*
+!packages/**/.env.example
 supabase/.env

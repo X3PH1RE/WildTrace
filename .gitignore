@@ -4,6 +4,7 @@ dist
 .expo
 .turbo
 *.log
+*.tsbuildinfo
 coverage
 .DS_Store
 *.pem

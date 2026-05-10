@@ -1,0 +1,16 @@
+node_modules
+dist
+.next
+.expo
+.turbo
+*.log
+.env
+.env*.local
+apps/*/.env
+apps/*/.env.local
+coverage
+.DS_Store
+*.pem
+supabase/.branches
+supabase/.temp
+supabase/.env

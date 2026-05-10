@@ -1,0 +1,12 @@
+# Minimal Supabase CLI config — extend as needed after `supabase init` if you use local stack.
+
+project_id = "wildtrace"
+
+[api]
+enabled = true
+
+[db]
+major_version = 15
+
+[functions]
+enabled = true

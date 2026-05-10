@@ -14,6 +14,7 @@ import {
 
 import { Text as ThemedText, View as ThemedView } from "@/components/Themed";
 import { classifyFromStorageUrl } from "@/lib/classification";
+import { requireSession } from "@/lib/session";
 import { isSupabaseConfigured, supabase } from "@/lib/supabase";
 import { useWildtraceStore } from "@/lib/store";
 import { persistSighting } from "@/lib/uploadSighting";
@@ -62,10 +63,7 @@ export default function ScanScreen() {
 
       let imageUrl = uri;
       if (isSupabaseConfigured) {
-        const {
-          data: { user },
-        } = await supabase.auth.getUser();
-        if (!user) throw new Error("No active session");
+        const user = await requireSession();
         const path = `${user.id}/${Date.now()}.jpg`;
         const res = await fetch(uri);
         const blob = await res.blob();
@@ -125,10 +123,7 @@ export default function ScanScreen() {
       const timestamp = new Date(position.timestamp).toISOString();
       let imageUrl = previewUri;
       if (isSupabaseConfigured) {
-        const {
-          data: { user },
-        } = await supabase.auth.getUser();
-        if (!user) throw new Error("No active session");
+        const user = await requireSession();
         const path = `${user.id}/saved-${Date.now()}.jpg`;
         const res = await fetch(previewUri);
         const blob = await res.blob();

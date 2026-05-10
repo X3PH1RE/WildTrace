@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { StyleSheet, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 
 import { Text as ThemedText, View as ThemedView } from "@/components/Themed";
+import { signOut } from "@/lib/session";
 import { isSupabaseConfigured, supabase } from "@/lib/supabase";
 import type { UserProfile } from "@wildtrace/shared-types";
 
@@ -47,6 +48,9 @@ export default function ProfileScreen() {
       <ThemedText style={styles.note}>
         Invasive alerts, badges, and streak logic layer on top of this progress core.
       </ThemedText>
+      <Pressable style={styles.signOutBtn} onPress={() => void signOut()}>
+        <Text style={styles.signOutText}>Sign out</Text>
+      </Pressable>
     </ThemedView>
   );
 }
@@ -73,4 +77,13 @@ const styles = StyleSheet.create({
   statLabel: { opacity: 0.7, fontSize: 13 },
   note: { opacity: 0.75, lineHeight: 20, marginTop: 8 },
   body: { textAlign: "center", marginTop: 8 },
+  signOutBtn: {
+    marginTop: 16,
+    borderWidth: 1,
+    borderColor: "#b91c1c",
+    paddingVertical: 12,
+    borderRadius: 12,
+    alignItems: "center",
+  },
+  signOutText: { color: "#b91c1c", fontWeight: "600" },
 });

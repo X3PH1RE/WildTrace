@@ -1,5 +1,6 @@
 import type { SpeciesClassificationResult } from "@wildtrace/shared-types";
 
+import { requireSession } from "@/lib/session";
 import { isSupabaseConfigured, supabase } from "@/lib/supabase";
 
 export async function persistSighting(params: {
@@ -10,10 +11,7 @@ export async function persistSighting(params: {
   species: SpeciesClassificationResult;
 }): Promise<void> {
   if (!isSupabaseConfigured) return;
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) throw new Error("Not signed in");
+  const user = await requireSession();
 
   const { data: speciesRow, error: speciesError } = await supabase
     .from("species")
